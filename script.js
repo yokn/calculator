@@ -1,4 +1,7 @@
 /* eslint-disable no-console */
+// TODO: Pressing = before entering all of the numbers or an operator could cause problems!
+// TODO: Not add a 0 before every number..
+// TODO: Start new operation with two different numbers even when there is a previous result
 const numberArray = [];
 numberArray[0] = 0; // I can't seem to find a good way to initialize an array without undefined
 numberArray[1] = 0; // so I have to do this /shrug
@@ -46,6 +49,9 @@ function main(buttonId) {
                 display.textContent = 0;
         }
         if (buttonId === 'equals') {
+                if (i === 0) {
+                        return;
+                }
                 previousResult = operate(operator, numberArray[0], numberArray[1]);
                 display.textContent = previousResult;
                 i = 0;
