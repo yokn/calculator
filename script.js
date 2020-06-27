@@ -32,6 +32,7 @@ function operate(operator, number1, number2) {
 
 function main(buttonId) {
         const display = document.querySelector('#display');
+
         if (buttonId == 'equals') {
                 previousResult = operate(operator, numberArray[0], numberArray[1]);
                 display.textContent = previousResult;
@@ -48,6 +49,7 @@ function main(buttonId) {
                         i = 1;
                 }
                 numberArray[i] = buttonId;
+                display.textContent = numberArray[i];
                 console.log(numberArray[i]);
                 console.log(numberArray);
                 // console.log(`i-1: ${numberArray[i - 1]}`);
