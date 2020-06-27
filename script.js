@@ -1,9 +1,11 @@
+/* eslint-disable no-console */
 const numberArray = [];
 numberArray[0] = 0; // I can't seem to find a good way to initialize an array without undefined
 numberArray[1] = 0; // so I have to do this /shrug
 let i = 0;
 let operator;
 let previousResult;
+
 function add(x, y) {
         return x + y;
 }
@@ -14,11 +16,14 @@ function multiply(x, y) {
         return x * y;
 }
 function divide(x, y) {
+        if (y === '00') {
+                return "Can't divide by zero";
+        }
         return x / y;
 }
 
-function operate(operator, number1, number2) {
-        switch (operator) {
+function operate(op, number1, number2) {
+        switch (op) {
                 case '+':
                         return add(number1, number2);
                 case '-':
@@ -34,7 +39,12 @@ function operate(operator, number1, number2) {
 
 function main(buttonId) {
         const display = document.querySelector('#display');
-
+        if (buttonId === 'clear') {
+                i = 0;
+                numberArray[0] = 0;
+                numberArray[1] = 0;
+                display.textContent = 0;
+        }
         if (buttonId === 'equals') {
                 previousResult = operate(operator, numberArray[0], numberArray[1]);
                 display.textContent = previousResult;
@@ -63,11 +73,11 @@ function main(buttonId) {
         if (/[-+*//]/.test(buttonId)) {
                 operator = buttonId;
                 console.log(operator);
-                i++;
+                i += 1;
                 console.log(i);
         }
         // }
-        console.log('memes');
+        console.log('end cycle');
 }
 
 const button = document.querySelectorAll('button');
