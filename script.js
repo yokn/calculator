@@ -1,5 +1,6 @@
-const numberArray = [];
+let numberArray = [];
 let i = 0;
+let operator;
 function add(x, y) {
         return x + y;
 }
@@ -15,13 +16,13 @@ function divide(x, y) {
 
 function operate(operator, number1, number2) {
         switch (operator) {
-                case 'plus':
+                case '+':
                         return add(number1, number2);
-                case 'minus':
+                case '-':
                         return subtract(number1, number2);
-                case 'asterisk':
+                case '*':
                         return multiply(number1, number2);
-                case 'slash':
+                case '/':
                         return divide(number1, number2);
                 default:
                         console.log(`Can't find case`);
@@ -29,6 +30,16 @@ function operate(operator, number1, number2) {
 }
 
 function main(buttonId) {
+        const display = document.querySelector('#display');
+        if (buttonId == 'equals') {
+                display.textContent = operate(operator, numberArray[0], numberArray[1]);
+                i = 0;
+                numberArray = [];
+        }
+        if (i > 1) {
+                i = 0;
+                numberArray = [];
+        }
         if (/[0-9]/.test(buttonId)) {
                 numberArray[i] = buttonId;
                 console.log(numberArray[i]);
@@ -38,9 +49,10 @@ function main(buttonId) {
                 console.log(i);
                 return;
         }
-        const operator = buttonId;
-        const display = document.querySelector('#display');
-        display.textContent = operate(operator, numberArray[i - 1], numberArray[i]);
+        if (/[-+*//]/.test(buttonId)) {
+                operator = buttonId;
+                console.log(operator);
+        }
 }
 
 const button = document.querySelectorAll('button');
