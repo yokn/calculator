@@ -1,6 +1,7 @@
 let numberArray = [];
 let i = 0;
 let operator;
+let previousResult;
 function add(x, y) {
         return x + y;
 }
@@ -32,15 +33,20 @@ function operate(operator, number1, number2) {
 function main(buttonId) {
         const display = document.querySelector('#display');
         if (buttonId == 'equals') {
-                display.textContent = operate(operator, numberArray[0], numberArray[1]);
+                previousResult = operate(operator, numberArray[0], numberArray[1]);
+                display.textContent = previousResult;
                 i = 0;
                 numberArray = [];
+                numberArray[0] = previousResult;
         }
         if (i > 1) {
                 i = 0;
                 numberArray = [];
         }
         if (/[0-9]/.test(buttonId)) {
+                if (!(previousResult == undefined)) {
+                        i = 1;
+                }
                 numberArray[i] = buttonId;
                 console.log(numberArray[i]);
                 console.log(numberArray);
