@@ -1,3 +1,6 @@
+let number1;
+let number2;
+
 function add(x, y) {
         return x + y;
 }
@@ -13,15 +16,26 @@ function divide(x, y) {
 
 function operate(operator, number1, number2) {
         switch (operator) {
-                case plus:
+                case 'plus':
                         return add(number1, number2);
-                case minus:
+                case 'minus':
                         return subtract(number1, number2);
-                case asterisk:
+                case 'asterisk':
                         return multiply(number1, number2);
-                case slash:
+                case 'slash':
                         return divide(number1, number2);
                 default:
-                        console.log(`Can't find case`);
+                        alert(`Can't find case`);
         }
 }
+
+function main(buttonId) {
+        operate(buttonId, number1, number2);
+}
+
+const button = document.querySelectorAll('button');
+button.forEach(() =>
+        document.addEventListener('click', () => {
+                main(button.id);
+        })
+);
