@@ -1,5 +1,5 @@
 /* eslint-disable no-console */
-// TODO: Pressing = before entering all of the numbers or an operator could cause problems!
+// i think i fixed this? TODO: Pressing = before entering all of the numbers or an operator could cause problems!
 // TODO: Not add a 0 before every number..
 // TODO: Start new operation with two different numbers even when there is a previous result
 const numberArray = [];
@@ -8,7 +8,7 @@ numberArray[1] = 0; // so I have to do this /shrug
 let i = 0;
 let operator;
 let previousResult;
-
+let previousButtonId;
 function add(x, y) {
         return x + y;
 }
@@ -42,13 +42,17 @@ function operate(op, number1, number2) {
 
 function main(buttonId) {
         const display = document.querySelector('#display');
+        console.log(`previous button id: ${previousButtonId}`);
         if (buttonId === 'clear') {
+                previousButtonId = buttonId;
+                previousResult = undefined;
                 i = 0;
                 numberArray[0] = 0;
                 numberArray[1] = 0;
                 display.textContent = 0;
         }
         if (buttonId === 'equals') {
+                previousButtonId = buttonId;
                 if (i === 0) {
                         return;
                 }
@@ -58,16 +62,31 @@ function main(buttonId) {
                 // numberArray = [0];
                 numberArray[0] = previousResult;
                 numberArray[1] = 0;
+                return;
         }
-        if (i > 1) {
+        if (
+                i == 1 &&
+                !(/[-+*//]/.test(buttonId) || /[-+*//]/.test(previousButtonId)) &&
+                !(previousResult == undefined)
+        ) {
+                console.log('hi');
+                previousResult = undefined;
                 i = 0;
-                numberArray[0] = 0;
+                previousButtonId = buttonId;
+                numberArray[0] = buttonId;
                 numberArray[1] = 0;
         }
+        // if (i == 1) {
+        //         console.log('abc');
+        //         i = 0;
+        //         numberArray[0] = 0;
+        //         numberArray[1] = 0;
+        // }
         if (/[0-9]/.test(buttonId)) {
                 if (!(previousResult === undefined)) {
                         i = 1;
                 }
+                previousButtonId = buttonId;
                 numberArray[i] += buttonId;
                 display.textContent = numberArray[i];
                 console.log(numberArray[i]);
@@ -77,6 +96,7 @@ function main(buttonId) {
         }
         // if (i = 1) {
         if (/[-+*//]/.test(buttonId)) {
+                previousButtonId = buttonId;
                 operator = buttonId;
                 console.log(operator);
                 i += 1;
@@ -84,6 +104,7 @@ function main(buttonId) {
         }
         // }
         console.log('end cycle');
+        // previousButtonId = buttonId;
 }
 
 const button = document.querySelectorAll('button');
