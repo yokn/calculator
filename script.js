@@ -2,6 +2,7 @@
 // i think i fixed this? TODO: Pressing = before entering all of the numbers or an operator could cause problems!
 // TODO: Not add a 0 before every number..
 // TODO: Start new operation with two different numbers even when there is a previous result
+// TODO: Pressing two operators back to back
 const numberArray = [];
 numberArray[0] = 0; // I can't seem to find a good way to initialize an array without undefined
 numberArray[1] = 0; // so I have to do this /shrug
@@ -70,18 +71,12 @@ function main(buttonId) {
                         previousResult = undefined;
                         i = 0;
                         numberArray[0] = 0;
-                        numberArray[0] = previousButtonId + buttonId;
+                        numberArray[0] = previousButtonId;
                         numberArray[1] = 0;
                         previousButtonId = buttonId;
                 }
                 console.log("didn't pass");
         }
-        // if (i == 1) {
-        //         console.log('abc');
-        //         i = 0;
-        //         numberArray[0] = 0;
-        //         numberArray[1] = 0;
-        // }
         if (/[0-9]/.test(buttonId)) {
                 if (!(previousResult === undefined)) {
                         i = 1;
