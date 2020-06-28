@@ -1,12 +1,10 @@
 /* eslint-disable no-console */
-// TODO: Not add a 0 before every number..
-const numberArray = [];
-numberArray[0] = 0; // I can't seem to find a good way to initialize an array without undefined
-numberArray[1] = 0; // so I have to do this /shrug
+let numberArray = [];
 let i = 0;
 let operator;
 let previousResult;
 let previousButtonId;
+
 function add(x, y) {
         return x + y;
 }
@@ -39,15 +37,17 @@ function operate(op, number1, number2) {
 }
 
 function main(buttonId) {
+        console.log('start cycle');
         const display = document.querySelector('#display');
         console.log(`previous button id: ${previousButtonId}`);
+
         if (buttonId === 'clear') {
                 previousButtonId = buttonId;
                 previousResult = undefined;
                 i = 0;
-                numberArray[0] = 0;
-                numberArray[1] = 0;
+                numberArray = [];
                 display.textContent = 0;
+                return;
         }
         if (buttonId === 'equals') {
                 if (i === 0 || /[-+*//]/.test(previousButtonId)) {
@@ -57,9 +57,8 @@ function main(buttonId) {
                 previousResult = operate(operator, numberArray[0], numberArray[1]);
                 display.textContent = previousResult;
                 i = 0;
-                // numberArray = [0];
+                numberArray = [];
                 numberArray[0] = previousResult;
-                numberArray[1] = 0;
                 return;
         }
         if (i === 1 && !/[-+*//]/.test(buttonId) && !(previousResult === undefined)) {
@@ -67,9 +66,8 @@ function main(buttonId) {
                         console.log('passed');
                         previousResult = undefined;
                         i = 0;
-                        numberArray[0] = 0;
+                        numberArray = [];
                         numberArray[0] = previousButtonId;
-                        numberArray[1] = 0;
                         previousButtonId = buttonId;
                 }
                 console.log("didn't pass");
@@ -79,14 +77,18 @@ function main(buttonId) {
                         i = 1;
                 }
                 previousButtonId = buttonId;
-                numberArray[i] += buttonId;
+
+                if (numberArray[i] === undefined) {
+                        numberArray[i] = buttonId;
+                } else if (numberArray[i] !== undefined) {
+                        numberArray[i] += buttonId;
+                }
+
                 display.textContent = numberArray[i];
                 console.log(numberArray[i]);
                 console.log(numberArray);
-
                 return;
         }
-        // if (i = 1) {
         if (/[-+*//]/.test(buttonId)) {
                 operator = buttonId;
                 console.log(operator);
@@ -96,9 +98,7 @@ function main(buttonId) {
                 console.log(i);
                 previousButtonId = buttonId;
         }
-        // }
         console.log('end cycle');
-        // previousButtonId = buttonId;
 }
 
 const button = document.querySelectorAll('button');
