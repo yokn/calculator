@@ -64,17 +64,17 @@ function main(buttonId) {
                 numberArray[1] = 0;
                 return;
         }
-        if (
-                i == 1 &&
-                !(/[-+*//]/.test(buttonId) || /[-+*//]/.test(previousButtonId)) &&
-                !(previousResult == undefined)
-        ) {
-                console.log('hi');
-                previousResult = undefined;
-                i = 0;
-                previousButtonId = buttonId;
-                numberArray[0] = buttonId;
-                numberArray[1] = 0;
+        if (i === 1 && !/[-+*//]/.test(buttonId) && !(previousResult === undefined)) {
+                if (!/[-+*//]/.test(previousButtonId)) {
+                        console.log('passed');
+                        previousResult = undefined;
+                        i = 0;
+                        numberArray[0] = 0;
+                        numberArray[0] = previousButtonId + buttonId;
+                        numberArray[1] = 0;
+                        previousButtonId = buttonId;
+                }
+                console.log("didn't pass");
         }
         // if (i == 1) {
         //         console.log('abc');
