@@ -4,7 +4,7 @@ let i = 0;
 let operator;
 let previousResult;
 let previousButtonId;
-
+let override = false;
 function add(x, y) {
         return Number(x) + Number(y);
 }
@@ -62,7 +62,7 @@ function main(buttonId) {
                 return;
         }
         if (i === 1 && !/[-+*//]/.test(buttonId) && !(previousResult === undefined)) {
-                if (!/[-+*//]/.test(previousButtonId)) {
+                if (!/[-+*//]/.test(previousButtonId) && override === false) {
                         console.log('passed');
                         previousResult = undefined;
                         i = 0;
@@ -90,7 +90,15 @@ function main(buttonId) {
                 return;
         }
         if (/[-+*//]/.test(buttonId)) {
+                if (numberArray[0] === undefined) {
+                        alert('Click a number first');
+                        return;
+                }
+                if (!(previousResult === undefined)) {
+                        override = true;
+                }
                 operator = buttonId;
+                display.textContent = operator;
                 console.log(operator);
                 if (!/[-+*//]/.test(previousButtonId)) {
                         i += 1;
