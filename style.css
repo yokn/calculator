@@ -7,6 +7,7 @@ body {
     overflow: hidden;
 }
 #display {
+    display: flex;
     max-width: 70vw;
     height: 22vh;
     font-family: monospace;

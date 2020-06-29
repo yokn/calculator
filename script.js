@@ -1,10 +1,15 @@
 /* eslint-disable no-console */
 // TODO: Fix overflow
-// TODO: Display every input properly
+// TODO: Fix pressing decimal while previousResult
 let numberArray = [];
 let operatorDisplay;
 let i = 0;
-let operator = 0;
+let firstNumber;
+let operator;
+let secondNumber;
+const firstNumberInvisible = false;
+let secondNumberInvisible = true;
+let operatorInvisible = true;
 let previousResult;
 let previousButtonId;
 let override = false;
@@ -41,13 +46,35 @@ function operate(op, number1, number2) {
         }
 }
 
-const display = document.querySelector('#display');
+const firstNumberSelection = document.querySelector('#firstNumber');
+const operatorSelection = document.querySelector('#operator');
+const secondNumberSelection = document.querySelector('#secondNumber');
 
 function updateDisplay() {
-        display.textContent =
-                (!(numberArray[0] === undefined) ? numberArray[0] : 0) +
-                (!(operatorDisplay === undefined) ? operatorDisplay : 0) +
-                (!(numberArray[1] === undefined) ? numberArray[1] : 0);
+        console.log(`array0is${numberArray[0]}`);
+        [firstNumber] = [numberArray[0]];
+        console.log(`first number is ${firstNumber}`);
+        operatorDisplay = operator;
+        [secondNumber] = [numberArray[1]];
+        firstNumberSelection.textContent = firstNumber;
+        operatorSelection.textContent = operatorDisplay;
+        secondNumberSelection.textContent = secondNumber;
+
+        if (firstNumberInvisible === true) {
+                firstNumberSelection.style = 'visibility: hidden';
+        } else if (firstNumberInvisible === false) {
+                firstNumberSelection.style = 'visibility: visible';
+        }
+        if (operatorInvisible === true) {
+                operatorSelection.style = 'visibility: hidden';
+        } else if (operatorInvisible === false) {
+                operatorSelection.style = 'visibility: visible';
+        }
+        if (secondNumberInvisible === true) {
+                secondNumberSelection.style = 'visibility: hidden';
+        } else if (secondNumberInvisible === false) {
+                secondNumberSelection.style = 'visibility: visible';
+        }
 }
 
 function main(buttonId) {
@@ -62,6 +89,10 @@ function main(buttonId) {
                 previousResult = undefined;
                 i = 0;
                 numberArray = [];
+                operatorInvisible = true;
+                secondNumberInvisible = true;
+                updateDisplay();
+                firstNumberSelection.textContent = '0';
                 return;
         }
         if (buttonId === 'equals') {
@@ -71,9 +102,12 @@ function main(buttonId) {
                 override = false;
                 previousButtonId = buttonId;
                 previousResult = operate(operator, numberArray[0], numberArray[1]);
+                previousResult = previousResult.toFixed(1);
                 i = 0;
                 numberArray = [];
                 numberArray[0] = previousResult;
+                operatorInvisible = true;
+                secondNumberInvisible = true;
                 updateDisplay();
                 return;
         }
@@ -96,6 +130,9 @@ function main(buttonId) {
                         hasDecimal = true;
                 }
                 if (!(previousResult === undefined)) {
+                        // if (previousResult.includes('.')) {
+                        //         return;
+                        // }
                         i = 1;
                 }
                 previousButtonId = buttonId;
@@ -105,6 +142,7 @@ function main(buttonId) {
                 } else if (numberArray[i] !== undefined) {
                         numberArray[i] += buttonId;
                 }
+                secondNumberInvisible = false;
                 updateDisplay();
                 console.log(numberArray[i]);
                 console.log(numberArray);
@@ -123,7 +161,7 @@ function main(buttonId) {
                         console.log('override:true');
                 }
                 operator = buttonId;
-                operatorDisplay = operator;
+                operatorInvisible = false;
                 updateDisplay();
                 console.log(operator);
                 if (!/[-+*//]/.test(previousButtonId)) {
@@ -134,8 +172,6 @@ function main(buttonId) {
         }
         console.log('end cycle');
 }
-
-display.textContent = numberArray[0] + operatorDisplay + numberArray[1];
 
 const button = document.querySelectorAll('button');
 button.forEach(x =>
