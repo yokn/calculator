@@ -1,9 +1,10 @@
 /* eslint-disable no-console */
 // TODO: Fix overflow
-// TODO: Display every input
+// TODO: Display every input properly
 let numberArray = [];
+let operatorDisplay;
 let i = 0;
-let operator;
+let operator = 0;
 let previousResult;
 let previousButtonId;
 let override = false;
@@ -40,9 +41,18 @@ function operate(op, number1, number2) {
         }
 }
 
+const display = document.querySelector('#display');
+
+function updateDisplay() {
+        display.textContent =
+                (!(numberArray[0] === undefined) ? numberArray[0] : 0) +
+                (!(operatorDisplay === undefined) ? operatorDisplay : 0) +
+                (!(numberArray[1] === undefined) ? numberArray[1] : 0);
+}
+
 function main(buttonId) {
         console.log('start cycle');
-        const display = document.querySelector('#display');
+
         console.log(`previous button id: ${previousButtonId}`);
 
         if (buttonId === 'clear') {
@@ -52,7 +62,6 @@ function main(buttonId) {
                 previousResult = undefined;
                 i = 0;
                 numberArray = [];
-                display.textContent = 0;
                 return;
         }
         if (buttonId === 'equals') {
@@ -62,10 +71,10 @@ function main(buttonId) {
                 override = false;
                 previousButtonId = buttonId;
                 previousResult = operate(operator, numberArray[0], numberArray[1]);
-                display.textContent = previousResult.toFixed(1);
                 i = 0;
                 numberArray = [];
                 numberArray[0] = previousResult;
+                updateDisplay();
                 return;
         }
         if (i === 1 && !/[-+*//]/.test(buttonId) && !(previousResult === undefined)) {
@@ -96,13 +105,15 @@ function main(buttonId) {
                 } else if (numberArray[i] !== undefined) {
                         numberArray[i] += buttonId;
                 }
-
-                display.textContent = numberArray[i];
+                updateDisplay();
                 console.log(numberArray[i]);
                 console.log(numberArray);
                 return;
         }
         if (/[-+*//]/.test(buttonId)) {
+                if (previousButtonId === buttonId) {
+                        return;
+                }
                 if (numberArray[0] === undefined) {
                         alert('Click a number first');
                         return;
@@ -112,7 +123,8 @@ function main(buttonId) {
                         console.log('override:true');
                 }
                 operator = buttonId;
-                display.textContent = operator;
+                operatorDisplay = operator;
+                updateDisplay();
                 console.log(operator);
                 if (!/[-+*//]/.test(previousButtonId)) {
                         i += 1;
@@ -122,6 +134,8 @@ function main(buttonId) {
         }
         console.log('end cycle');
 }
+
+display.textContent = numberArray[0] + operatorDisplay + numberArray[1];
 
 const button = document.querySelectorAll('button');
 button.forEach(x =>
