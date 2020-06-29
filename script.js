@@ -135,9 +135,6 @@ function main(buttonId) {
                         hasDecimal = true;
                 }
                 if (!(previousResult === undefined)) {
-                        // if (previousResult.includes('.')) {
-                        //         return;
-                        // }
                         i = 1;
                 }
                 previousButtonId = buttonId;

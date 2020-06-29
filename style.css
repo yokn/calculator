@@ -21,7 +21,7 @@ body {
     grid-template-columns: repeat(4,150px);
     
 }
-.operationButton{
+.operationButton {
     background-color:orange;
     font-size: 5em;
     font-weight: bold;
@@ -31,7 +31,7 @@ body {
     font-size: 3em;
     font-weight: bold;
 }
-.numberButton{
+.numberButton {
     font-size: 3em;
     font-weight: bold;
 }
@@ -40,6 +40,9 @@ body {
     grid-template-rows: repeat(3,150px);
     grid-template-columns: repeat(4,150px);
     
+}
+#clear {
+    background-color: red;
 }
 #equals {
     height: 225px;
