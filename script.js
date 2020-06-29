@@ -1,6 +1,5 @@
 /* eslint-disable no-console */
 // TODO: Fix overflow
-// TODO: Fix pressing decimal while previousResult
 let numberArray = [];
 let operatorDisplay;
 let i = 0;
@@ -124,6 +123,12 @@ function main(buttonId) {
         }
         if (/[0-9.]/.test(buttonId)) {
                 if (buttonId === '.') {
+                        if (!(previousResult === undefined)) {
+                                hasDecimal = true;
+                        }
+                        if (!numberArray[1].includes('.')) {
+                                hasDecimal = false;
+                        }
                         if (hasDecimal === true) {
                                 return;
                         }
