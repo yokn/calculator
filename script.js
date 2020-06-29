@@ -25,7 +25,7 @@ function multiply(x, y) {
 }
 function divide(x, y) {
         if (y === '0') {
-                return "Can't divide by zero";
+                return 'DIVBYZERO';
         }
         return x / y;
 }
@@ -99,7 +99,9 @@ function main(buttonId) {
                 override = false;
                 previousButtonId = buttonId;
                 previousResult = operate(operator, numberArray[0], numberArray[1]);
-                previousResult = previousResult.toFixed(1);
+                if (!(previousResult === 'DIVBYZERO')) {
+                        previousResult = previousResult.toFixed(1);
+                }
                 i = 0;
                 numberArray = [];
                 numberArray[0] = previousResult;
