@@ -1,5 +1,6 @@
 /* eslint-disable no-console */
 // TODO: Fix overflow
+// TODO: Display every input
 let numberArray = [];
 let i = 0;
 let operator;

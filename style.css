@@ -17,21 +17,34 @@ body {
     display: grid;
     grid-template-rows: repeat(1,150px);
     grid-template-columns: repeat(4,150px);
+    
 }
-#special3 {
-    display: flex;
-    flex-direction: column;
+.operationButton{
+    background-color:orange;
+    font-size: 5em;
+    font-weight: bold;
+}
+.special3 {
+    background-color: lightblue;
+    font-size: 3em;
+    font-weight: bold;
+}
+.numberButton{
+    font-size: 3em;
+    font-weight: bold;
 }
 #numbers {
     display: grid;
     grid-template-rows: repeat(3,150px);
     grid-template-columns: repeat(4,150px);
-
+    
 }
-#equals{
+#equals {
     height: 225px;
 }
 .zero {
-width: 450px;
-height: 75px;
+    width: 450px;
+    height: 75px;
+    font-size: 3em;
+    font-weight: bold;
 }
