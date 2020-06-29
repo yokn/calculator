@@ -50,9 +50,7 @@ const operatorSelection = document.querySelector('#operator');
 const secondNumberSelection = document.querySelector('#secondNumber');
 
 function updateDisplay() {
-        console.log(`array0is${numberArray[0]}`);
         [firstNumber] = [numberArray[0]];
-        console.log(`first number is ${firstNumber}`);
         operatorDisplay = operator;
         [secondNumber] = [numberArray[1]];
         firstNumberSelection.textContent = firstNumber;
@@ -95,7 +93,7 @@ function main(buttonId) {
                 return;
         }
         if (buttonId === 'equals') {
-                if (i === 0 || /[-+*//]/.test(previousButtonId)) {
+                if (i === 0 || /[-+*/]/.test(previousButtonId)) {
                         return;
                 }
                 override = false;
@@ -110,8 +108,8 @@ function main(buttonId) {
                 updateDisplay();
                 return;
         }
-        if (i === 1 && !/[-+*//]/.test(buttonId) && !(previousResult === undefined)) {
-                if (!/[-+*//]/.test(previousButtonId) && override === false) {
+        if (i === 1 && !/[-+*/]/.test(buttonId) && !(previousResult === undefined)) {
+                if (!/[-+*/]/.test(previousButtonId) && override === false) {
                         console.log('passed');
                         previousResult = undefined;
                         i = 0;
@@ -150,7 +148,7 @@ function main(buttonId) {
                 console.log(numberArray);
                 return;
         }
-        if (/[-+*//]/.test(buttonId)) {
+        if (/[-+*/]/.test(buttonId)) {
                 if (previousButtonId === buttonId) {
                         return;
                 }
@@ -166,7 +164,7 @@ function main(buttonId) {
                 operatorInvisible = false;
                 updateDisplay();
                 console.log(operator);
-                if (!/[-+*//]/.test(previousButtonId)) {
+                if (!/[-+*/]/.test(previousButtonId)) {
                         i += 1;
                 }
                 console.log(i);
