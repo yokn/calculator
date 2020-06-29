@@ -7,6 +7,8 @@ let operator;
 let previousResult;
 let previousButtonId;
 let override = false;
+let hasDecimal = false;
+
 function add(x, y) {
         return Number(x) + Number(y);
 }
@@ -45,6 +47,7 @@ function main(buttonId) {
 
         if (buttonId === 'clear') {
                 override = false;
+                hasDecimal = false;
                 previousButtonId = buttonId;
                 previousResult = undefined;
                 i = 0;
@@ -59,7 +62,7 @@ function main(buttonId) {
                 override = false;
                 previousButtonId = buttonId;
                 previousResult = operate(operator, numberArray[0], numberArray[1]);
-                display.textContent = previousResult;
+                display.textContent = previousResult.toFixed(1);
                 i = 0;
                 numberArray = [];
                 numberArray[0] = previousResult;
@@ -77,6 +80,12 @@ function main(buttonId) {
                 console.log("didn't pass");
         }
         if (/[0-9.]/.test(buttonId)) {
+                if (buttonId === '.') {
+                        if (hasDecimal === true) {
+                                return;
+                        }
+                        hasDecimal = true;
+                }
                 if (!(previousResult === undefined)) {
                         i = 1;
                 }
