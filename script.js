@@ -1,6 +1,5 @@
 /* eslint-disable no-console */
-// TODO:Make period work
-// TODO:Fix error when starting new operation while having previousResult
+// TODO: Fix overflow
 let numberArray = [];
 let i = 0;
 let operator;
@@ -44,6 +43,7 @@ function main(buttonId) {
         console.log(`previous button id: ${previousButtonId}`);
 
         if (buttonId === 'clear') {
+                override = false;
                 previousButtonId = buttonId;
                 previousResult = undefined;
                 i = 0;
@@ -75,7 +75,7 @@ function main(buttonId) {
                 }
                 console.log("didn't pass");
         }
-        if (/[0-9]/.test(buttonId)) {
+        if (/[0-9.]/.test(buttonId)) {
                 if (!(previousResult === undefined)) {
                         i = 1;
                 }
