@@ -1,4 +1,6 @@
 /* eslint-disable no-console */
+// TODO:Make period work
+// TODO:Fix error when starting new operation while having previousResult
 let numberArray = [];
 let i = 0;
 let operator;
@@ -53,6 +55,7 @@ function main(buttonId) {
                 if (i === 0 || /[-+*//]/.test(previousButtonId)) {
                         return;
                 }
+                override = false;
                 previousButtonId = buttonId;
                 previousResult = operate(operator, numberArray[0], numberArray[1]);
                 display.textContent = previousResult;
@@ -96,6 +99,7 @@ function main(buttonId) {
                 }
                 if (!(previousResult === undefined)) {
                         override = true;
+                        console.log('override:true');
                 }
                 operator = buttonId;
                 display.textContent = operator;
