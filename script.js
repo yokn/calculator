@@ -1,5 +1,4 @@
 /* eslint-disable no-console */
-// TODO: Fix overflow
 let numberArray = [];
 let operatorDisplay;
 let i = 0;
@@ -25,6 +24,7 @@ function multiply(x, y) {
 }
 function divide(x, y) {
         if (y === '0') {
+                alert("Can't divide by zero");
                 return 'DIVBYZERO';
         }
         return x / y;
@@ -99,12 +99,12 @@ function main(buttonId) {
                 override = false;
                 previousButtonId = buttonId;
                 previousResult = operate(operator, numberArray[0], numberArray[1]);
+                numberArray = [];
                 if (!(previousResult === 'DIVBYZERO')) {
                         previousResult = previousResult.toFixed(1);
+                        numberArray[0] = previousResult;
                 }
                 i = 0;
-                numberArray = [];
-                numberArray[0] = previousResult;
                 operatorInvisible = true;
                 secondNumberInvisible = true;
                 updateDisplay();
