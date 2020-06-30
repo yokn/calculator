@@ -58,19 +58,19 @@ function updateDisplay() {
         secondNumberSelection.textContent = secondNumber;
 
         if (firstNumberInvisible === true) {
-                firstNumberSelection.style = 'visibility: hidden';
+                firstNumberSelection.style = 'display:none';
         } else if (firstNumberInvisible === false) {
-                firstNumberSelection.style = 'visibility: visible';
+                firstNumberSelection.style = 'display:flex';
         }
         if (operatorInvisible === true) {
-                operatorSelection.style = 'visibility: hidden';
+                operatorSelection.style = 'display:none';
         } else if (operatorInvisible === false) {
-                operatorSelection.style = 'visibility: visible';
+                operatorSelection.style = 'display:flex';
         }
         if (secondNumberInvisible === true) {
-                secondNumberSelection.style = 'visibility: hidden';
+                secondNumberSelection.style = 'display:none';
         } else if (secondNumberInvisible === false) {
-                secondNumberSelection.style = 'visibility: visible';
+                secondNumberSelection.style = 'display:flex';
         }
 }
 
