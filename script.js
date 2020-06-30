@@ -126,8 +126,10 @@ function main(buttonId) {
                         if (!(previousResult === undefined)) {
                                 hasDecimal = true;
                         }
-                        if (!numberArray[1].includes('.')) {
-                                hasDecimal = false;
+                        if (!(numberArray[1] === undefined)) {
+                                if (!numberArray[1].includes('.')) {
+                                        hasDecimal = false;
+                                }
                         }
                         if (hasDecimal === true) {
                                 return;
